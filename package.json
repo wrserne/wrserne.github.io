@@ -1,0 +1,22 @@
+{
+  "name": "suttonreef",
+  "version": "1.0.0",
+  "description": "Reef-pi and Robo-Tank Controller Monitoring Website",
+  "main": "homepage.html",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wrserne/SuttonReef.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wrserne/SuttonReef/issues"
+  },
+  "homepage": "https://github.com/wrserne/SuttonReef#readme"
+}
