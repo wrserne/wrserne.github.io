@@ -2,121 +2,74 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="sutton.css">
-    <style>
-        p {
-          background-image: url('1491581693744.jpg');
-        }
-        </style>
-    <title>W3.CSS Template</title>
+    <title>Sutton Reef</title>
+    <script type="module" src="requests.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
-body, html {
-  height: 100%;
-  color: #777;
-  line-height: 1.8;
-}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="module">
+      import { getCurrentTemperatureReading, getCurrentPHReading } from './requests.js';
+    </script>
+    <script>
+      // Wait for DOM to load before executing JavaScript
+      document.addEventListener("DOMContentLoaded", function(event) {
+        
+        // Vue app for temperature and pH readings
+        new Vue({
+          el: '#app',
+          data: {
+            temperature: 'Loading...',
+            pH: 'Loading...',
+          },
+          mounted() {
+            // Get current temperature and pH readings
+            getCurrentTemperatureReading().then(reading => this.temperature = reading.toFixed(2));
+            getCurrentPHReading().then(reading => this.pH = reading.toFixed(2));
+          },
+        });
 
-/* Create a Parallax Effect */
-.bgimg-1, .bgimg-2, .bgimg-3 {
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+        // Update temperature and pH readings every 10 seconds
+        setInterval(() => {
+          getCurrentTemperatureReading().then(reading => document.getElementById('temp').innerText = reading.toFixed(2));
+          getCurrentPHReading().then(reading => document.getElementById('ph').innerText = reading.toFixed(2));
+        }, 10000);
 
-/* First image (Logo. Full height) */
-.bgimg-1 {
-  background-image: url('1491581693744.jpg');
-  min-height: 100%;
-}
-
-/* Second image (Portfolio) */
-.bgimg-2 {
-  background-image: url("1491581693744.jpg");
-  min-height: 400px;
-}
-
-/* Third image (Contact) */
-.bgimg-3 {
-  background-image: url("1491581693744.jpg");
-  min-height: 400px;
-}
-
-.w3-wide {letter-spacing: 10px;}
-.w3-hover-opacity {cursor: pointer;}
-
-/* Turn off parallax scrolling for tablets and phones */
-@media only screen and (max-device-width: 1600px) {
-  .bgimg-1, .bgimg-2, .bgimg-3 {
-    background-attachment: scroll;
-    min-height: 400px;
-  }
-}
-</style>
+      });
+    </script>
   </head>
   <body>
-
-
-
-
-
     <!-- First Parallax Image with Logo Text -->
     <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
       <div class="w3-display-middle" style="white-space:nowrap;">
-
-        <span class="w3-center w3-padding-right w3-black w3-xlarge
-          w3-wide w3-animate-opacity">
-          <iframe width="560" height="315"
-            src="https://www.youtube.com/embed/A7gifjaEIco?controls=0"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write;
-            encrypted-media; gyroscope; picture-in-picture;
-            web-share" allowfullscreen></iframe>
+        <span class="w3-center w3-padding-right w3-black w3-xlarge w3-wide w3-animate-opacity">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/A7gifjaEIco?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           <br>
-
-          <span
-            class="w3-hide-small w3-padding-large">Welcome to Sutton Reef!
-
-            <br>
-
-          </div>
+        </span>
+        <span class="w3-hide-small w3-padding-medium">Welcome to Sutton Reef! <br></span>
+      </div>
+    </div>
+    <div class="container">
+      </div>
+      <div id="app">
+        <h2>Temperature and pH Readings</h2>
+        <div class="card">
+          <h2>Temperature</h2>
+          <p id="temp">Loading...</p>
+        <canvas id="chart"></canvas>
+        <div class="card">
+          <h2>pH</h2>
+          <p id="ph">Loading...</p>
         </div>
-        <div class="container">
-          <div class="card">
-            <h2>Temperature</h2>
-            <p id="temperature"></p>
-          </div>
-          <div class="card">
-            <h2>pH</h2>
-            <p id="ph"></p>
-          </div>
-        </div>
-        <br>
-        <br>
-
-
-        <div class="w3-row w3-center w3-dark-grey w3-padding-16">
-          <div class="w3-quarter w3-section">
-            <span class="w3-xlarge">Tropical Fish</span><br>
-
-          </div>
-          <div class="w3-quarter w3-section">
-            <span class="w3-xlarge">Live Coral</span><br>
-
-          </div>
-          <div class="w3-quarter w3-section">
-            <span class="w3-xlarge">Invertebrates</span><br>
-
-          </div>
-          <div class="w3-quarter w3-section">
-            <span class="w3-xlarge">55 Gallons </span><br>
-
-          </div>
-        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+  
+    <script src="sutton.css"></script>
+  </body>
+</html>
