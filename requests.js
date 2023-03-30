@@ -5,7 +5,10 @@ const tempProbeId = 'temp'; // Replace with your actual temperature probe ID
 const phProbeId = 'pH'; // Replace with your actual pH probe ID
 
 const api = axios.create({
-  baseURL
+  baseURL,
+  headers: {
+    'Origin': window.location.origin
+  }
 });
 
 // Function to get current temperature reading for a probe
