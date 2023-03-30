@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://192.168.68.51/';
+const baseURL = 'https://cors-anywhere.herokuapp.com/http://192.168.68.51/';
 const tempProbeId = 'temp'; // Replace with your actual temperature probe ID
 const phProbeId = 'pH'; // Replace with your actual pH probe ID
 
