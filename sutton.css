@@ -41,3 +41,17 @@ body, html {
 
 /* Third image (Contact) */
 .bg
+
+.col-sm {
+  text-align: center;
+  flex-basis: 50%;
+  display: flex; /* Add this to make the columns display in a row */
+  align-items: center; /* Center the contents vertically */
+  justify-content: space-around; /* Add some space between the columns */
+}
+
+/* Style the values */
+#temp, #ph {
+  margin-top: 0;
+  font-size: 1.5em; /* Reduce the font size */
+}
