@@ -6,12 +6,14 @@
     <script type="module" src="requests.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="module">
       import { getCurrentTemperatureReading, getCurrentPHReading } from './requests.js';
     </script>
@@ -30,42 +32,64 @@
         text-shadow: 2px 2px #000000;
         margin: 0;
       }
+
+      /* Style the card */
+      .card-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        font-family: 'Lato', sans-serif;
+        font-size: 2em;
+      }
+
+      /* Style the temperature and ph */
+      .col-sm {
+        text-align: center;
+        flex-basis: 50%;
+      }
+
+      /* Style the values */
+      #temp, #ph {
+        margin-top: 0;
+      }
     </style>
-    
     <!-- First Parallax Image with Logo Text -->
-   
-        <div class="header">
-          <h1>Welcome to Sutton Reef!</h1>
-        </div>
-       
-      </div>
-    </div>
+
+    <div class="header">
+      <h1>Welcome to Sutton Reef!</h1>
     </div>
     <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
       <div class="w3-display-middle" style="white-space:nowrap;">
-        <span class="w3-center w3-padding-right w3-black w3-xlarge w3-wide w3-animate-opacity">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/A7gifjaEIco?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <span class="w3-center w3-padding-right w3-black w3-xlarge w3-wide
+          w3-animate-opacity">
+          <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/A7gifjaEIco?controls=0"
+            title="YouTube video player" frameborder="0" allow="accelerometer;
+            autoplay; clipboard-write; encrypted-media; gyroscope;
+            picture-in-picture; web-share" allowfullscreen></iframe>
           <br>
         </span>
         >
       </div>
     </div>
+
     <div class="container">
-      </div>
       <div id="app">
         <div class="card">
-          <div class="card-header">
-            <h2>Temperature and pH Readings</h2>
-          </div>
           <div class="card-body">
             <div class="row">
               <div class="col-sm">
-                <h3>Temperature</h3>
-                <p id="temp">Loading...</p>
+                <h3 style="font-size: 3.5em; color: #6821d1; text-shadow: 2px
+                  2px #000000;">Temperature</h3>
+                <p id="temp" style="font-size: 3em; color: #6821d1; text-shadow:
+                  2px 2px #000000;">Loading...</p>
               </div>
               <div class="col-sm">
-                <h3>pH</h3>
-                <p id="ph">Loading...</p>
+                <h3 style="font-size: 3.5em; color: #6821d1; text-shadow: 2px
+                  2px #000000;">pH</h3>
+                <p id="ph" style="font-size: 3em; color: #6821d1; text-shadow:
+                  2px 2px #000000;">Loading...</p>
               </div>
             </div>
             <canvas id="chart"></canvas>
@@ -73,5 +97,3 @@
         </div>
       </div>
     </div>
-  </body>
-  </html>
