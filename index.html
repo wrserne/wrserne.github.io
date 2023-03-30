@@ -15,6 +15,47 @@
     <script type="module">
       import { getCurrentTemperatureReading, getCurrentPHReading } from './requests.js';
     </script>
+    <style>
+      /* Style the header */
+      .header {
+        background-color: #f1f1f1;
+        padding: 30px;
+        text-align: center;
+        font-size: 35px;
+      }
+
+      /* Create two columns/boxes that floats next to each other */
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      /* Style the left column */
+      .leftcolumn {
+        flex: 50%;
+        padding: 20px;
+      }
+
+      /* Style the right column */
+      .rightcolumn {
+        flex: 50%;
+        padding: 20px;
+      }
+
+      /* Style the footer */
+      .footer {
+        background-color: #f1f1f1;
+        padding: 10px;
+        text-align: center;
+      }
+
+      /* Responsive layout - makes the menu and the right column stack on top of each other */
+      @media (max-width: 600px) {
+        .row, .navbar {
+          flex-direction: column;
+        }
+      }
+    </style>
     <script>
       // Wait for DOM to load before executing JavaScript
       document.addEventListener("DOMContentLoaded", function(event) {
@@ -56,20 +97,25 @@
     <div class="container">
       </div>
       <div id="app">
-        <h2>Temperature and pH Readings</h2>
         <div class="card">
-          <h2>Temperature</h2>
-          <p id="temp">Loading...</p>
-        <canvas id="chart"></canvas>
-        <div class="card">
-          <h2>pH</h2>
-          <p id="ph">Loading...</p>
+          <div class="card-header">
+            <h2>Temperature and pH Readings</h2>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm">
+                <h3>Temperature</h3>
+                <p id="temp">Loading...</p>
+              </div>
+              <div class="col-sm">
+                <h3>pH</h3>
+                <p id="ph">Loading...</p>
+              </div>
+            </div>
+            <canvas id="chart"></canvas>
+          </div>
         </div>
       </div>
     </div>
-    <br>
-    <br>
-  
-    <script src="sutton.css"></script>
   </body>
-</html>
+  </html>
