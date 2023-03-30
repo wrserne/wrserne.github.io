@@ -21,71 +21,30 @@
         background-color: #f1f1f1;
         padding: 30px;
         text-align: center;
-        font-size: 35px;
       }
-
-      /* Create two columns/boxes that floats next to each other */
-      .row {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      /* Style the left column */
-      .leftcolumn {
-        flex: 50%;
-        padding: 20px;
-      }
-
-      /* Style the right column */
-      .rightcolumn {
-        flex: 50%;
-        padding: 20px;
-      }
-
-      /* Style the footer */
-      .footer {
-        background-color: #f1f1f1;
-        padding: 10px;
-        text-align: center;
-      }
-
-      /* Responsive layout - makes the menu and the right column stack on top of each other */
-      @media (max-width: 600px) {
-        .row, .navbar {
-          flex-direction: column;
-        }
+      
+      /* Style the title */
+      .header h1 {
+        font-size: 4em;
+        color: #ffffff;
+        text-shadow: 2px 2px #000000;
+        margin: 0;
       }
     </style>
-    <script>
-      // Wait for DOM to load before executing JavaScript
-      document.addEventListener("DOMContentLoaded", function(event) {
-        
-        // Vue app for temperature and pH readings
-        new Vue({
-          el: '#app',
-          data: {
-            temperature: 'Loading...',
-            pH: 'Loading...',
-          },
-          mounted() {
-            // Get current temperature and pH readings
-            getCurrentTemperatureReading().then(reading => this.temperature = reading.toFixed(2));
-            getCurrentPHReading().then(reading => this.pH = reading.toFixed(2));
-          },
-        });
-
-        // Update temperature and pH readings every 10 seconds
-        setInterval(() => {
-          getCurrentTemperatureReading().then(reading => document.getElementById('temp').innerText = reading.toFixed(2));
-          getCurrentPHReading().then(reading => document.getElementById('ph').innerText = reading.toFixed(2));
-        }, 10000);
-
-      });
-    </script>
-  </head>
-  <body>
-    <div class="header">
-      <h1 style="font-size: 5em; color: #ffffff; text-shadow: 2px 2px #000000;">Discover Sutton Reef</h1>
+    
+    <!-- First Parallax Image with Logo Text -->
+    <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+      <div class="w3-display-middle" style="white-space:nowrap;">
+        <span class="w3-center w3-padding-right w3-black w3-xlarge w3-wide w3-animate-opacity">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/A7gifjaEIco?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <br>
+        </span>
+        <div class="header">
+          <h1>Discover Sutton Reef</h1>
+        </div>
+        <span class="w3-hide-small w3-padding-medium">Welcome to Sutton Reef! <br></span>
+      </div>
+    </div>
     </div>
     <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
       <div class="w3-display-middle" style="white-space:nowrap;">
