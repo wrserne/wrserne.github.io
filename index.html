@@ -91,7 +91,7 @@
     </div>
     <script>
       window.onload = function() {
-        fetch('https://myreefpi.com/api/data', {method: 'GET'})
+        fetch('http://192.168.68.61/api/data', {method: 'GET'})
           .then(response => response.json())
           .then(data => {
             document.getElementById("temp").innerHTML = data.temp;
