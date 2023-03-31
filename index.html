@@ -82,11 +82,12 @@
         </span>
       </div>
     </div>
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
     <div class="w3-display-middle" style="white-space:nowrap;">
-      <span class="w3-bottommiddle w3-padding-right w3-black w3-xlarge w3-wide w3-animate-opacity">
+      <span class="w3-bottommiddle w3-padding-right w3-black w3-xlarge w3-wide
+        w3-animate-opacity">
         <p>Current Temperature: <span id="temp">Loading...</span> °F</p>
         <p>Current pH: <span id="ph">Loading...</span></p>
       </span>
@@ -101,4 +102,27 @@
           });
       };
     </script>
-
+    <div class="container">
+      <div id="app">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm">
+                <h3 style="font-size: 2em; color: #6821d1; text-shadow: 2px
+                  2px #000000;"> <p>Current Temperature: </p></h3>
+                <p id="temp" style="font-size: 1.5em; color: #0c0419;
+                  text-shadow:
+                  2px 2px #000000;"><span id="temp">Loading...</span> °F</p>
+              </div>
+              <div class="col-sm">
+                <h3 style="font-size: 2em; color: #6821d1; text-shadow: 2px
+                  2px #000000;">pH</h3>
+                <p id="ph" style="font-size: 1.5em; color: #0a0116; text-shadow:
+                  2px 2px #000000;"><span id="ph">Loading...</span></p>
+              </div>
+            </div>
+            <canvas id="chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
