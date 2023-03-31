@@ -1,89 +1,83 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="sutton.css">
-    <title>Sutton Reef</title>
-    <script type="module" src="requests.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="module">
-      import { getCurrentTemperatureReading, getCurrentPHReading } from './requests.js';
-      getCurrentTemperatureReading().then((temperature) => {
-        document.getElementById('temp').innerHTML = temperature + '&deg;F';
+<head>
+  <title>Reef-pi Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./requests.js"></script>
+  <script>
+    // Replace the following variables with your own values
+    const REEF_PI_IP_ADDRESS = '192.168.68.61';
+    const REEF_PI_PORT = '8080';
+    const USERNAME = 'reef-pi';
+    const PASSWORD = 'reef-pi';
+
+    // Authenticate with Reef-pi and retrieve the session ID and API key
+    authenticateWithReefPi((error, { sessionId, apiKey }) => {
+      if (error) {
+        console.error('Failed to authenticate with Reef-pi:', error);
+        return;
+      }
+
+      // Get the current temperature reading from a probe named "Temp Probe 1"
+      getCurrentTemperature(sessionId, apiKey, 'Temp Probe 1', (error, temperature) => {
+        if (error) {
+          console.error('Failed to get current temperature:', error);
+          return;
+        }
+        $('#temperature').text(temperature);
       });
-      getCurrentPHReading().then((ph) => {
-        document.getElementById('ph').innerHTML = ph;
+    });
+
+    function authenticateWithReefPi(callback) {
+      // Send a GET request to the login endpoint to retrieve the session ID
+      const loginUrl = `http://${REEF_PI_IP_ADDRESS}:${REEF_PI_PORT}/login`;
+      $.get(loginUrl, (response) => {
+        // Extract the session ID from the response
+        const sessionId = response.headers['set-cookie'][0].split(';')[0].split('=')[1];
+
+        // Generate the digest hash using the password and the session ID
+        const digest = generateDigest(PASSWORD, sessionId);
+
+        // Send a POST request to the login endpoint with the digest hash
+        const postData = { username: USERNAME, password: digest };
+        const options = {
+          url: loginUrl,
+          json: true,
+          headers: { 'X-Api-Key': digest },
+          body: postData,
+        };
+        $.post(options, (response) => {
+          // Return the session ID and API key in the callback
+          const sessionId = response.headers['set-cookie'][0].split(';')[0].split('=')[1];
+          const apiKey = response.headers['x-api-key'];
+          callback(null, { sessionId, apiKey });
+        }).fail((error) => {
+          callback(error);
+        });
+      }).fail((error) => {
+        callback(error);
       });
-    </script>
-    <style>
-      /* Style the header */
-      .header {
-        background-color: #f1f1f1;
-        padding: 30px;
-        text-align: center;
-      }
-      
-      /* Style the title */
-      .header h1 {
-        font-size: 3.5em;
-        color: #6821d1;
-        text-shadow: 2px 2px #000000;
-        margin: 0;
-      }
+    }
 
-      /* Style the card */
-      .card-body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        font-family: 'Lato', sans-serif;
-        font-size: 2em;
-      }
+    function generateDigest(password, sessionId) {
+      const hmac = require('crypto').createHmac('sha256', password);
+      hmac.update(sessionId);
+      return hmac.digest('hex');
+    }
 
-      /* Style the temperature and ph */
-      .col-sm {
-        text-align: center;
-        flex-basis: 50%;
-      }
-
-      /* Style the values */
-      #temp, #ph {
-        margin-top: 0;
-        font-size: 1.5em;
-        color: #0c0419;
-        text-shadow: 2px 2px #000000;
-      }
-    </style>
-    <!-- First Parallax Image with Logo Text -->
-
-    <div class="header">
-      <h1>Welcome to Sutton Reef!</h1>
-    </div>
-    <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
-      <div class="w3-display-middle" style="white-space:nowrap;">
-        <span class="w3-center w3-padding-right w3-black w3-xlarge w3-wide
-          w3-animate-opacity">
-          <iframe width="560" height="315"
-            src="https://www.youtube.com/embed/A7gifjaEIco?controls=0"
-            title="YouTube video player" frameborder="0" allow="accelerometer;
-            autoplay; clipboard-write; encrypted-media; gyroscope;
-            picture-in-picture; web-share" allowfullscreen></iframe>
-          <br>
-        </span>
-        >
-      </div>
-    </div>
-
-    <div class="container">
-      <div id="app">
-        <div class="card">
-          <div class="card-body
+    function getCurrentTemperature(sessionId, apiKey, probeName, callback) {
+      const url = `http://${REEF_PI_IP_ADDRESS}:${REEF_PI_PORT}/api/tc/${probeName}`;
+      const headers = { 'X-Session-ID': sessionId, 'X-API-Key': apiKey };
+      $.get({ url, headers, json: true }, (response) => {
+        callback(null, response.current);
+      }).fail((error) => {
+        callback(error);
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>Current temperature:</h1>
+  <p id="temperature"></p>
+</body>
+</html>
