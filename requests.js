@@ -89,4 +89,3 @@ authenticateWithReefPi((error, { sessionId, apiKey }) => {
     console.log('Current temperature:', temperature);
   })})
 
-  
