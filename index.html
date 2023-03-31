@@ -16,6 +16,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="module">
       import { getCurrentTemperatureReading, getCurrentPHReading } from './requests.js';
+      getCurrentTemperatureReading().then((temperature) => {
+        document.getElementById('temp').innerHTML = temperature + '&deg;F';
+      });
+      getCurrentPHReading().then((ph) => {
+        document.getElementById('ph').innerHTML = ph;
+      });
     </script>
     <style>
       /* Style the header */
@@ -52,6 +58,9 @@
       /* Style the values */
       #temp, #ph {
         margin-top: 0;
+        font-size: 1.5em;
+        color: #0c0419;
+        text-shadow: 2px 2px #000000;
       }
     </style>
     <!-- First Parallax Image with Logo Text -->
@@ -77,23 +86,4 @@
     <div class="container">
       <div id="app">
         <div class="card">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm">
-                <h3 style="font-size: 2em; color: #6821d1; text-shadow: 2px
-                  2px #000000;">Temperature</h3>
-                <p id="temp" style="font-size: 1.5em; color: #0c0419; text-shadow:
-                  2px 2px #000000;">Loading...</p>
-              </div>
-              <div class="col-sm">
-                <h3 style="font-size: 2em; color: #6821d1; text-shadow: 2px
-                  2px #000000;">pH</h3>
-                <p id="ph" style="font-size: 1.5em; color: #0a0116; text-shadow:
-                  2px 2px #000000;">Loading...</p>
-              </div>
-            </div>
-            <canvas id="chart"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
+          <div class="card-body
