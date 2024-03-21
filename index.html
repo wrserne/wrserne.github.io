@@ -1,150 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="sutton.css">
-    <title>Sutton Reef</title>
-    <script type="module" src="requests.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="module">
-      import { getCurrentTemperature, getCurrentPH } from './requests.js';
-      
-      async function updateReadings() {
-        const temp = await getCurrentTemperature();
-        const ph = await getCurrentPH();
-        document.getElementById('temp').textContent = temp;
-        document.getElementById('ph').textContent = ph;
-      }
-
-      setInterval(updateReadings, 5000);
-    </script>
-    <style>
-      /* Style the header */
-      .header {
-        background-color: #f1f1f1;
-        padding: 30px;
-        text-align: center;
-      }
-      
-      /* Style the title */
-      .header h1 {
-        font-size: 3.5em;
-        color: #6821d1;
-        text-shadow: 2px 2px #000000;
-        margin: 0;
-      }
-
-      /* Style the card */
-      .card-body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        font-family: 'Lato', sans-serif;
-        font-size: 2em;
-      }
-
-      /* Style the temperature and ph */
-      .col-sm {
-        text-align: center;
-        flex-basis: 50%;
-      }
-
-      /* Style the values */
-      #temp, #ph {
-        margin-top: 0;
-      }
-      .parameter {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2em;
-        color: #6821d1;
-        text-shadow: 2px 2px #000000;
-        margin-top: 30px;
-      }
-      .parameter-value {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5em;
-        color: #0c0419;
-        text-shadow: 2px 2px #000000;
-        margin-top: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- First Parallax Image with Logo Text -->
-    <div class="header">
-      <h1>Welcome to Sutton Reef!</h1>
-    </div>
+<head>
+  <link rel="stylesheet" type="text/css" href="sutton.css">
+  <title>Sutton Reef</title>
+  <script type="module" src="requests.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="module">
+    import { getCurrentTemperature, getCurrentPH } from './requests.js';
     
-       <iframe width="1120" height="630" src="https://www.youtube.com/embed/A7gifjaEIco?si=svgH0L-BEskSshc9&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <br>
-        </span>
-      </div>
-  
-  <!-- /*    <div class="container">
-        <div id="app">
-          <div class="card">
-            <div class="card-body">
-              <canvas id="chart"></canvas>
-              <div class="row mt-5">
-                <div class="col-sm">
-                  <h3 style="font-size: 2em; color: #6821d1; text-shadow: 2px
-                    2px #000000;">Temperature</h3>
-                  <p id="temp" style="font-size: 1.5em; color: #0c0419;
-                    text-shadow:
-                    2px 2px #000000;"><span id="temp">Loading...</span> °F</p>
-                </div>
-                <div class="col-sm">
-                  <h3 style="font-size: 2em; color: #6821d1; text-shadow: 2px
-                    2px #000000;">pH</h3>
-                  <p id="ph" style="font-size: 1.5em; color: #0a0116; text-shadow:
-                    2px 2px #000000;"><span id="ph">Loading...</span></p>
-                </div>
-                <div class="col-sm">
-                  <!-- Add additional parameters here -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  /* -->
-    <script>
-      window.onload = function() {
-        fetch('https://192.168.68.61/api/data', {method: 'GET'})
-          .then(response => response.json())
-          .then(data => {
-            document.getElementById("temp").innerHTML = data.temp;
-            document.getElementById("ph").innerHTML = data.ph;
-          });
-      };
-    </script>
-  
-    <script type="module">
-      import { getCurrentTemperature, getCurrentPH } from './requests.js';
-  
-      async function updateReadings() {
-        const temp = await getCurrentTemperature();
-        const ph = await getCurrentPH();
-        document.getElementById('temp').textContent = temp;
-        document.getElementById('ph').textContent = ph;
-      }
-  
-      setInterval(updateReadings, 5000);
-    </script>
-  
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </body>
+    async function updateReadings() {
+      const temp = await getCurrentTemperature();
+      const ph = await getCurrentPH();
+      document.getElementById('temp').textContent = temp;
+      document.getElementById('ph').textContent = ph;
+    }
+
+    setInterval(updateReadings, 5000);
+  </script>
+  <style>
+    /* Style the header */
+    .header {
+      background-color: #f1f1f1;
+      padding: 30px;
+      text-align: center;
+    }
+    
+    /* Style the title */
+    .header h1 {
+      font-size: 3.5em;
+      color: #6821d1;
+      text-shadow: 2px 2px #000000;
+      margin: 0;
+    }
+
+    /* Center the video */
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Style the video */
+    .video-container iframe {
+      width: 80vw; /* Adjust width for responsiveness */
+      max-width: 1120px; /* Max width for larger screens */
+      height: 45vw; /* Adjust height for responsiveness */
+      max-height: 630px; /* Max height for larger screens */
+    }
+  </style>
+</head>
+<body>
+  <!-- First Parallax Image with Logo Text -->
+  <div class="header">
+    <h1>Welcome to Sutton Reef!</h1>
+  </div>
+
+  <!-- Video container for centering -->
+  <div class="video-container">
+    <iframe width="1120" height="630" src="https://www.youtube.com/embed/A7gifjaEIco?si=svgH0L-BEskSshc9&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen autoplay></iframe>
+  </div>
+
+  <!-- Your additional content can go here if needed -->
+
+  <script>
+    // Your JavaScript code can go here if needed
+  </script>
+</body>
+</html>
+
