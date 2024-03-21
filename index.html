@@ -12,22 +12,23 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="module">
-    import { getCurrentTemperature, getCurrentPH } from './requests.js';
-    
-    async function updateReadings() {
-      const temp = await getCurrentTemperature();
-      const ph = await getCurrentPH();
-      document.getElementById('temp').textContent = temp;
-      document.getElementById('ph').textContent = ph;
+  <style>
+    /* Reset default margin and padding */
+    body, html {
+      margin: 0;
+      padding: 0;
     }
 
-    setInterval(updateReadings, 5000);
-  </script>
-  <style>
+    /* Set background image */
+    body {
+      background-image: url('coral-reefs-2728211_16x9.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
     /* Style the header */
     .header {
-      background-color: #f1f1f1;
+      background-color: rgba(241, 241, 241, 0.9); /* Semi-transparent background color for better readability */
       padding: 30px;
       text-align: center;
     }
